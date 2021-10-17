@@ -328,3 +328,43 @@ void scrollTextTwo() {
   scrollText(2, NORMAL, CRGB::Green, CRGB(0,0,8));
 }
 
+// Draw jack-o'-lantern eyes with flickering orange pattern
+const byte pumpkinBitmap[5] = {
+  0b00010000,
+  0b00111000,
+  0b01111100,
+  0b11111110,
+  0b00000000 };
+  
+void pumpkin() {
+
+  // startup tasks
+  if (effectInit == false) {
+    effectInit = true;
+    effectDelay = 10;
+  }
+  
+  CRGB currentColor;
+  CRGB flickerOrange;
+  static int flickerBrightness = 200;
+  int flickerIncrement = random(25) - 12;
+  flickerBrightness += flickerIncrement;
+  if (flickerBrightness < 50) flickerBrightness = 50;
+  if (flickerBrightness > 255) flickerBrightness = 255;
+  flickerOrange = 0xFF6000;
+  flickerOrange.nscale8_video(flickerBrightness);
+  
+  for (byte y = 0; y < 5; y++) {
+    for (byte x = 0; x < 8; x++) {
+      if (bitRead(pumpkinBitmap[y],7-x) == 1) {
+        currentColor = flickerOrange;
+      } else {
+        currentColor = CRGB::Black;
+      }
+      
+      leds[XY(x,y)] = currentColor;
+      leds[XY(15-x,y)] = currentColor;
+    }
+  }
+
+}
