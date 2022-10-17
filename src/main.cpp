@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 //   RGB Shades Demo Code
 //   Copyright (c) 2015 macetech LLC
 //   This software is provided under the MIT License (see license.txt)
@@ -63,7 +65,7 @@
 
 // list of functions that will be displayed
 functionList effectList[] = {threeSine,
-                             threeDee,
+                             //threeDee,
                              scrollTextZero,
                              plasma,
                              confetti,
@@ -74,7 +76,9 @@ functionList effectList[] = {threeSine,
                              scrollTextTwo,
                              colorFill,
                              sideRain,
-                             //pumpkin
+                             nick,
+                             nick2,
+                             //pumpkin,
                             };
 
 const byte numEffects = (sizeof(effectList)/sizeof(effectList[0]));
